@@ -19,10 +19,7 @@
 
 #include "emulator.h"
 
-#include "address_modes.h"
-
-#define INS(x) void x(u8 (*read_byte)(void),\
-                      void (*write_byte)(u8))
+#define INS(x) void x(void)
 
 // ADC - add with carry
 extern INS(ADC);

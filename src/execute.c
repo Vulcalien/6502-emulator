@@ -16,16 +16,27 @@
  */
 #include "execute.h"
 
-#include "address_modes.h"
 #include "instructions.h"
+#include "memory_io.h"
 
-#define SET(opcode, inst, addr_fn) operations[opcode] = (struct operation) {\
-                                       inst, addr_fn\
-                                   }
+
+#define SET(opcode, inst, addressing_mode)\
+            operations[opcode] = (struct operation) {\
+                inst, addressing_mode\
+            }
+
+// addressing modes
+#define IMP NULL,          NULL,           NULL
+#define ACC read_byte_acc, NULL, write_byte_acc
+#define IMM read_byte_imm, NULL,           NULL
+// TODO continue...
 
 struct operation {
-    void (*inst)(addr_function addr);
-    addr_function addr; // this differs based on the addressing mode
+    void (*inst)(void);
+
+    u8   (*read_byte) (void);
+    u16  (*read_word) (void);
+    void (*write_byte)(u8 byte);
 };
 
 static struct operation *operations;
@@ -33,10 +44,15 @@ static struct operation *operations;
 void execute_init(void) {
     operations = calloc(256, sizeof(struct operation));
 
-    /*SET(0x00, BRK, R_IMP);*/
+    SET(0x00, BRK, IMP);
 }
 
 void execute(u8 opcode) {
-    struct operation op = operations[opcode];
-    op.inst(op.addr);
+    struct operation *op = &operations[opcode];
+
+    mem_read_byte = op->read_byte;
+    mem_read_word = op->read_word;
+    mem_write_byte = op->write_byte;
+
+    op->inst();
 }

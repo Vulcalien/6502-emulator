@@ -14,25 +14,40 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-#ifndef VULC_6502_EMULATOR_ADDRESS_MODES
-#define VULC_6502_EMULATOR_ADDRESS_MODES
+#include "memory_io.h"
 
-#include "emulator.h"
+#include "registers.h"
 
-typedef u8 (*addr_function)(void);
+u8  (*mem_read_byte)(void) = NULL;
+u16 (*mem_read_word)(void) = NULL;
 
-extern addr_function A_IMP; // implicit
-extern addr_function A_ACC; // accumulator
-extern addr_function A_IMM; // immediate
-extern addr_function A_ZPG; // zero page
-extern addr_function A_ZPX; // zero page X
-extern addr_function A_ZPY; // zero page Y
-extern addr_function A_REL; // relative
-extern addr_function A_ABS; // absolute
-extern addr_function A_ABX; // absolute X
-extern addr_function A_ABY; // absolute Y
-extern addr_function A_IND; // indirect
-extern addr_function A_INX; // indirect X
-extern addr_function A_INY; // indirect Y
+void (*mem_write_byte)(u8 byte) = NULL;
 
-#endif // VULC_6502_EMULATOR_ADDRESS_MODES
+/* Addressing mode:
+ * imp = implicit
+ * acc = accumulator
+ * imm = immediate
+ * zpg = zero page
+ * zpx = zero page X
+ * zpy = zero page Y
+ * rel = relative
+ * abs = absolute
+ * abx = absolute X
+ * aby = absolute Y
+ * ind = indirect
+ * inx = indirect X
+ * iny = indirect Y
+ */
+
+// ACC - accumulator
+READ_B(read_byte_acc) {
+    return reg_a;
+}
+WRITE_B(write_byte_acc) {
+    reg_a = byte;
+}
+
+// IMM - immediate
+READ_B(read_byte_imm) {
+    return fetch_byte();
+}

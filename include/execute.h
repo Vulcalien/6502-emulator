@@ -19,8 +19,6 @@
 
 #include "emulator.h"
 
-#include "address_modes.h"
-
 extern void execute_init(void);
 
 extern void execute(u8 opcode);

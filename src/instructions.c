@@ -25,7 +25,7 @@ INS(ADC) {
 
 // AND - logical AND
 INS(AND) {
-    u8 v = read_byte();
+    u8 v = mem_read_byte();
 
     reg_a &= v;
 
@@ -176,17 +176,26 @@ INS(JSR) {
 
 // LDA - load accumulator
 INS(LDA) {
-    // TODO LDA
+    reg_a = mem_read_byte();
+
+    reg_flags.z = (reg_a == 0);
+    reg_flags.n = (reg_a & 0x80) != 0;
 }
 
 // LDX - load X register
 INS(LDX) {
-    // TODO LDX
+    reg_x = mem_read_byte();
+
+    reg_flags.z = (reg_x == 0);
+    reg_flags.n = (reg_x & 0x80) != 0;
 }
 
 // LDY - load Y register
 INS(LDY) {
-    // TODO LDY
+    reg_y = mem_read_byte();
+
+    reg_flags.z = (reg_y == 0);
+    reg_flags.n = (reg_y & 0x80) != 0;
 }
 
 // LSR - logical shift right
@@ -265,17 +274,17 @@ INS(SEI) {
 
 // STA - store accumulator
 INS(STA) {
-    // TODO STA
+    mem_write_byte(reg_a);
 }
 
 // STX - store X register
 INS(STX) {
-    // TODO STX
+    mem_write_byte(reg_x);
 }
 
 // STY - store Y register
 INS(STY) {
-    // TODO STY
+    mem_write_byte(reg_y);
 }
 
 // TAX - transfer accumulator to X

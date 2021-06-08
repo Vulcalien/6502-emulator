@@ -30,8 +30,4 @@ extern u8 *memory;
  * Costs one CPU cycle. */
 extern u8 fetch_byte(void);
 
-/* Read one byte from memory.
- * Costs one CPU cycle. */
-extern u8 read_byte_absolute(u16 address);
-
 #endif // VULC_6502_EMULATOR_CORE
