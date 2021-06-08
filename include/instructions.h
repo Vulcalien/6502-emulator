@@ -200,8 +200,7 @@ extern INS(LSR_abs);
 extern INS(LSR_abx);
 
 // NOP - no operation
-INS(NOP_imp) {
-}
+extern INS(NOP_imp);
 
 // ORA - logical inclusive OR
 extern INS(ORA_imm);
