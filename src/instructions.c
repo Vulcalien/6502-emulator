@@ -196,7 +196,6 @@ INS(LSR) {
 
 // NOP - no operation
 INS(NOP) {
-    // TODO NOP
 }
 
 // ORA - logical inclusive OR
@@ -297,20 +296,29 @@ INS(TAY) {
 
 // TSX - transfer stack pointer to X
 INS(TSX) {
-    // TODO TSX
+    reg_x = reg_s;
+
+    reg_flags.z = (reg_x == 0);
+    reg_flags.n = (reg_x & 0x80) != 0;
 }
 
 // TXA - transfer X to accumulator
 INS(TXA) {
-    // TODO TXA
+    reg_a = reg_x;
+
+    reg_flags.z = (reg_a == 0);
+    reg_flags.n = (reg_a & 0x80) != 0;
 }
 
 // TXS - transfer X to stack pointer
 INS(TXS) {
-    // TODO TXS
+    reg_s = reg_x;
 }
 
 // TYA - transfer Y to accumulator
 INS(TYA) {
-    // TODO TYA
+    reg_a = reg_y;
+
+    reg_flags.z = (reg_a == 0);
+    reg_flags.n = (reg_a & 0x80) != 0;
 }
