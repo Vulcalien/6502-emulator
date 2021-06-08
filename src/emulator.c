@@ -30,6 +30,6 @@ u8 fetch_byte(void) {
     return result;
 }
 
-u8 read_byte(u16 address) {
+u8 read_byte_absolute(u16 address) {
     return memory[address];
 }
