@@ -14,19 +14,29 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-#include "opcodes.h"
+#include "execute.h"
 
-#include "read_functions.h"
+#include "address_modes.h"
 #include "instructions.h"
 
-#define SET(opcode, inst, read_fn) operations[opcode] = (struct operation) {\
-                                       inst, read_fn\
+#define SET(opcode, inst, addr_fn) operations[opcode] = (struct operation) {\
+                                       inst, addr_fn\
                                    }
 
-struct operation *operations;
+struct operation {
+    void (*inst)(addr_function addr);
+    addr_function addr; // this differs based on the addressing mode
+};
 
-void opcodes_init(void) {
+static struct operation *operations;
+
+void execute_init(void) {
     operations = calloc(256, sizeof(struct operation));
 
-    SET(0x00, BRK, R_IMP);
+    /*SET(0x00, BRK, R_IMP);*/
+}
+
+void execute(u8 opcode) {
+    struct operation op = operations[opcode];
+    op.inst(op.addr);
 }

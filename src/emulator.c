@@ -17,14 +17,26 @@
 #include "emulator.h"
 
 #include "registers.h"
-#include "opcodes.h"
+#include "execute.h"
 
 u8 *memory;
 
 int main(int argc, const char *argv[]) {
-    opcodes_init();
+    execute_init();
 
     memory = calloc(MEMORY_SIZE, sizeof(u8));
+
+    while(true) {
+        execute(fetch_byte());
+
+        for(u16 i = 0; i < 16; i++) {
+            for(u16 j = 0; j < 16; j++) {
+                printf("%3d ", memory[i + j  * 16]);
+            }
+            putchar('\n');
+        }
+        getchar();
+    }
 }
 
 u8 fetch_byte(void) {

@@ -14,20 +14,15 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-#ifndef VULC_6502_EMULATOR_OPCODES
-#define VULC_6502_EMULATOR_OPCODES
+#ifndef VULC_6502_EMULATOR_EXECUTE
+#define VULC_6502_EMULATOR_EXECUTE
 
 #include "emulator.h"
 
-#include "read_functions.h"
+#include "address_modes.h"
 
-struct operation {
-    void (*inst)(read_function read_byte);
-    read_function read_byte; // this differs based on the addressing mode
-};
+extern void execute_init(void);
 
-extern struct operation *operations;
+extern void execute(u8 opcode);
 
-extern void opcodes_init(void);
-
-#endif // VULC_6502_EMULATOR_OPCODES
+#endif // VULC_6502_EMULATOR_EXECUTE

@@ -25,7 +25,12 @@ INS(ADC) {
 
 // AND - logical AND
 INS(AND) {
-    // TODO AND
+    u8 v = read_byte();
+
+    reg_a &= v;
+
+    reg_flags.z = (reg_a == 0);
+    reg_flags.n = (reg_a & 0x80) != 0;
 }
 
 // ASL - arithmetic shift left
@@ -85,22 +90,22 @@ INS(BVS) {
 
 // CLC - clear carry flag
 INS(CLC) {
-    // TODO CLC
+    reg_flags.c = 0;
 }
 
 // CLD - clear decimal mode
 INS(CLD) {
-    // TODO CLD
+    reg_flags.d = 0;
 }
 
 // CLI - clear interrupt disable
 INS(CLI) {
-    // TODO CLI
+    reg_flags.i = 0;
 }
 
 // CLV - clear overflow flag
 INS(CLV) {
-    // TODO CLV
+    reg_flags.v = 0;
 }
 
 // CMP - compare
@@ -145,12 +150,18 @@ INS(INC) {
 
 // INX - increment X register
 INS(INX) {
-    // TODO INX
+    reg_x++;
+
+    reg_flags.z = (reg_x == 0);
+    reg_flags.n = (reg_x & 0x80) != 0;
 }
 
 // INY - increment Y register
 INS(INY) {
-    // TODO INY
+    reg_y++;
+
+    reg_flags.z = (reg_y == 0);
+    reg_flags.n = (reg_y & 0x80) != 0;
 }
 
 // JMP - jump
@@ -240,17 +251,17 @@ INS(SBC) {
 
 // SEC - set carry flag
 INS(SEC) {
-    // TODO SEC
+    reg_flags.c = 1;
 }
 
-// SED - set decimal flag
+// SED - set decimal mode
 INS(SED) {
-    // TODO SED
+    reg_flags.d = 1;
 }
 
 // SEI - set interrupt disable
 INS(SEI) {
-    // TODO SEI
+    reg_flags.i = 1;
 }
 
 // STA - store accumulator
@@ -270,17 +281,23 @@ INS(STY) {
 
 // TAX - transfer accumulator to X
 INS(TAX) {
-    // TODO TAX
+    reg_x = reg_a;
+
+    reg_flags.z = (reg_x == 0);
+    reg_flags.n = (reg_x & 0x80) != 0;
 }
 
 // TAY - transfer accumulator to Y
 INS(TAY) {
-    // TODO TAY
+    reg_y = reg_a;
+
+    reg_flags.z = (reg_y == 0);
+    reg_flags.n = (reg_y & 0x80) != 0;
 }
 
 // TSX - transfer stack pointer to X
-INS(TSA) {
-    // TODO TSA
+INS(TSX) {
+    // TODO TSX
 }
 
 // TXA - transfer X to accumulator

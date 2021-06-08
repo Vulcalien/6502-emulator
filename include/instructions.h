@@ -19,9 +19,10 @@
 
 #include "emulator.h"
 
-#include "read_functions.h"
+#include "address_modes.h"
 
-#define INS(x) void x(read_function read_byte)
+#define INS(x) void x(u8 (*read_byte)(void),\
+                      void (*write_byte)(u8))
 
 // ADC - add with carry
 extern INS(ADC);
@@ -158,7 +159,7 @@ extern INS(SBC);
 // SEC - set carry flag
 extern INS(SEC);
 
-// SED - set decimal flag
+// SED - set decimal mode
 extern INS(SED);
 
 // SEI - set interrupt disable
@@ -180,7 +181,7 @@ extern INS(TAX);
 extern INS(TAY);
 
 // TSX - transfer stack pointer to X
-extern INS(TSA);
+extern INS(TSX);
 
 // TXA - transfer X to accumulator
 extern INS(TXA);
