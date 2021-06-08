@@ -17,9 +17,9 @@
 #include "registers.h"
 
 u16 reg_pc;
-u8 reg_s;
-u8 reg_a;
-u8 reg_x;
-u8 reg_y;
+u8  reg_s;
+u8  reg_a;
+u8  reg_x;
+u8  reg_y;
 
 struct processor_flags reg_flags;

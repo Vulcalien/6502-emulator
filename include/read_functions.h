@@ -21,31 +21,18 @@
 
 typedef u8 (*read_function)(void);
 
-// implicit
-extern read_function R_IMP;
-// accumulator
-extern read_function R_ACC;
-// immediate
-extern read_function R_IMM;
-// zero page
-extern read_function R_ZPG;
-// zero page X
-extern read_function R_ZPX;
-// zero page Y
-extern read_function R_ZPY;
-// relative
-extern read_function R_REL;
-// absolute
-extern read_function R_ABS;
-// absolute X
-extern read_function R_ABX;
-// absolute Y
-extern read_function R_ABY;
-// indirect
-extern read_function R_IND;
-// indirect X
-extern read_function R_INX;
-// indirect Y
-extern read_function R_INY;
+extern read_function R_IMP; // implicit
+extern read_function R_ACC; // accumulator
+extern read_function R_IMM; // immediate
+extern read_function R_ZPG; // zero page
+extern read_function R_ZPX; // zero page X
+extern read_function R_ZPY; // zero page Y
+extern read_function R_REL; // relative
+extern read_function R_ABS; // absolute
+extern read_function R_ABX; // absolute X
+extern read_function R_ABY; // absolute Y
+extern read_function R_IND; // indirect
+extern read_function R_INX; // indirect X
+extern read_function R_INY; // indirect Y
 
 #endif // VULC_6502_EMULATOR_READ_FUNCTIONS
