@@ -19,23 +19,9 @@
 
 #include "emulator.h"
 
-#define INS(x) void x(u8 (*read_byte)(void))
+#include "read_functions.h"
 
-/* Addressing mode:
- * imp = implicit
- * acc = accumulator
- * imm = immediate
- * zpg = zero page
- * zpx = zero page X
- * zpy = zero page Y
- * rel = relative
- * abs = absolute
- * abx = absolute X
- * aby = absolute Y
- * ind = indirect
- * inx = indirect X
- * iny = indirect Y
- */
+#define INS(x) void x(read_function read_byte)
 
 // ADC - add with carry
 extern INS(ADC);

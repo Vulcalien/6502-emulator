@@ -14,25 +14,38 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
+#ifndef VULC_6502_EMULATOR_READ_FUNCTIONS
+#define VULC_6502_EMULATOR_READ_FUNCTIONS
+
 #include "emulator.h"
 
-#include "registers.h"
-#include "opcodes.h"
+typedef u8 (*read_function)(void);
 
-u8 *memory;
+// implicit
+extern read_function R_IMP;
+// accumulator
+extern read_function R_ACC;
+// immediate
+extern read_function R_IMM;
+// zero page
+extern read_function R_ZPG;
+// zero page X
+extern read_function R_ZPX;
+// zero page Y
+extern read_function R_ZPY;
+// relative
+extern read_function R_REL;
+// absolute
+extern read_function R_ABS;
+// absolute X
+extern read_function R_ABX;
+// absolute Y
+extern read_function R_ABY;
+// indirect
+extern read_function R_IND;
+// indirect X
+extern read_function R_INX;
+// indirect Y
+extern read_function R_INY;
 
-int main(int argc, const char *argv[]) {
-    opcodes_init();
-
-    memory = calloc(MEMORY_SIZE, sizeof(u8));
-}
-
-u8 fetch_byte(void) {
-    u8 result = memory[reg_pc];
-    reg_pc++;
-    return result;
-}
-
-u8 read_byte_absolute(u16 address) {
-    return memory[address];
-}
+#endif // VULC_6502_EMULATOR_READ_FUNCTIONS

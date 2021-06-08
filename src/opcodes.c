@@ -14,25 +14,19 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-#include "emulator.h"
-
-#include "registers.h"
 #include "opcodes.h"
 
-u8 *memory;
+#include "read_functions.h"
+#include "instructions.h"
 
-int main(int argc, const char *argv[]) {
-    opcodes_init();
+#define SET(opcode, inst, read_fn) operations[opcode] = (struct operation) {\
+                                       inst, read_fn\
+                                   }
 
-    memory = calloc(MEMORY_SIZE, sizeof(u8));
-}
+struct operation *operations;
 
-u8 fetch_byte(void) {
-    u8 result = memory[reg_pc];
-    reg_pc++;
-    return result;
-}
+void opcodes_init(void) {
+    operations = calloc(256, sizeof(struct operation));
 
-u8 read_byte_absolute(u16 address) {
-    return memory[address];
+    SET(0x00, BRK, R_IMP);
 }

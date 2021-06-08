@@ -14,25 +14,20 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
+#ifndef VULC_6502_EMULATOR_OPCODES
+#define VULC_6502_EMULATOR_OPCODES
+
 #include "emulator.h"
 
-#include "registers.h"
-#include "opcodes.h"
+#include "read_functions.h"
 
-u8 *memory;
+struct operation {
+    void (*inst)(read_function read_byte);
+    read_function read_byte; // this differs based on the addressing mode
+};
 
-int main(int argc, const char *argv[]) {
-    opcodes_init();
+extern struct operation *operations;
 
-    memory = calloc(MEMORY_SIZE, sizeof(u8));
-}
+extern void opcodes_init(void);
 
-u8 fetch_byte(void) {
-    u8 result = memory[reg_pc];
-    reg_pc++;
-    return result;
-}
-
-u8 read_byte_absolute(u16 address) {
-    return memory[address];
-}
+#endif // VULC_6502_EMULATOR_OPCODES

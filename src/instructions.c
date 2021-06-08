@@ -18,22 +18,6 @@
 
 #include "registers.h"
 
-/* Addressing mode:
- * imp = implicit
- * acc = accumulator
- * imm = immediate
- * zpg = zero page
- * zpx = zero page X
- * zpy = zero page Y
- * rel = relative
- * abs = absolute
- * abx = absolute X
- * aby = absolute Y
- * ind = indirect
- * inx = indirect X
- * iny = indirect Y
- */
-
 // ADC - add with carry
 INS(ADC) {
     // TODO ADC
