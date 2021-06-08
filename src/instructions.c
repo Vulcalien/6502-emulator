@@ -18,8 +18,6 @@
 
 #include "registers.h"
 
-#define INS(x) void x(void)
-
 /* Addressing mode:
  * imp = implicit
  * acc = accumulator
