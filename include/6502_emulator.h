@@ -22,6 +22,10 @@
 extern u8 (*cpu_read_byte)(u16 addr);
 extern void (*cpu_write_byte)(u16 addr, u8 val);
 
+// initialize library internal variables
 extern void cpu_init(void);
+
+// this is not an actual clock, but a whole instruction
+extern void cpu_clock(void);
 
 #endif // VULC_6502_EMULATOR_API

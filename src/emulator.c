@@ -26,6 +26,10 @@ void cpu_init(void) {
     execute_init();
 }
 
+void cpu_clock(void) {
+    execute(fetch_byte());
+}
+
 /*
 int main(int argc, const char *argv[]) {
     execute_init();
