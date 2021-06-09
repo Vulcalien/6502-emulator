@@ -14,21 +14,29 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-#ifndef VULC_6502_EMULATOR_CORE
-#define VULC_6502_EMULATOR_CORE
+#ifndef VULC_6502_EMULATOR_REGISTERS
+#define VULC_6502_EMULATOR_REGISTERS
 
-#include <stdlib.h>
+#include "private/emulator.h"
 
-#include "vulcalien/vulcalien.h"
+struct processor_flags {
+    u8 c:1; // C - carry flag
+    u8 z:1; // Z - zero flag
+    u8 i:1; // I - interrupt disable
+    u8 d:1; // D - decimal mode
+    u8 b:1; // B - break flag
+    u8  :1; //
+    u8 v:1; // V - overflow flag
+    u8 n:1; // N - negative flag
+};
 
-#define MEMORY_SIZE (0xffff + 1)
+extern u16 reg_pc; // PC - program counter
+extern u8  reg_s;  //  S - stack pointer
+extern u8  reg_a;  //  A - acculumator
+extern u8  reg_x;  //  X - X index
+extern u8  reg_y;  //  Y - Y index
 
-#define BYTES_TO_WORD(lo, hi) (lo | (hi << 8))
+// processor flags
+extern struct processor_flags reg_flags;
 
-extern u8 *memory;
-
-/* Fetch one byte from memory and increment the program counter.
- * Costs one CPU cycle. */
-extern u8 fetch_byte(void);
-
-#endif // VULC_6502_EMULATOR_CORE
+#endif // VULC_6502_EMULATOR_REGISTERS

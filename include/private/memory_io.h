@@ -14,13 +14,22 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-#ifndef VULC_6502_EMULATOR_EXECUTE
-#define VULC_6502_EMULATOR_EXECUTE
+#ifndef VULC_6502_EMULATOR_MEMORY_IO
+#define VULC_6502_EMULATOR_MEMORY_IO
 
-#include "emulator.h"
+#include "private/emulator.h"
 
-extern void execute_init(void);
+#define READ_B(x)  u8  x(void)
+#define READ_W(x)  u16 x(void)
+#define WRITE_B(x) void x(u8 byte)
 
-extern void execute(u8 opcode);
+extern u16  mem_get_addr(void);
 
-#endif // VULC_6502_EMULATOR_EXECUTE
+extern u8   mem_read_byte(void);
+extern u16  mem_read_word(void);
+extern void mem_write_byte(u8 byte);
+
+extern void mem_set_addressing(u16 (*addr)(void));
+extern void mem_clear_addr_cache(void);
+
+#endif // VULC_6502_EMULATOR_MEMORY_IO

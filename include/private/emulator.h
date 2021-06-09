@@ -14,22 +14,21 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-#ifndef VULC_6502_EMULATOR_MEMORY_IO
-#define VULC_6502_EMULATOR_MEMORY_IO
+#ifndef VULC_6502_EMULATOR_CORE_P
+#define VULC_6502_EMULATOR_CORE_P
 
-#include "emulator.h"
+#include <stdlib.h>
 
-#define READ_B(x)  u8  x(void)
-#define READ_W(x)  u16 x(void)
-#define WRITE_B(x) void x(u8 byte)
+#include "private/vulcalien/vulcalien.h"
 
-extern u16  mem_get_addr(void);
+#define MEMORY_SIZE (0xffff + 1)
 
-extern u8   mem_read_byte(void);
-extern u16  mem_read_word(void);
-extern void mem_write_byte(u8 byte);
+#define BYTES_TO_WORD(lo, hi) (lo | (hi << 8))
 
-extern void mem_set_addressing(u16 (*addr)(void));
-extern void mem_clear_addr_cache(void);
+extern u8 *memory;
 
-#endif // VULC_6502_EMULATOR_MEMORY_IO
+/* Fetch one byte from memory and increment the program counter.
+ * Costs one CPU cycle. */
+extern u8 fetch_byte(void);
+
+#endif // VULC_6502_EMULATOR_CORE_P

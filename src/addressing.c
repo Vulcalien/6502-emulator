@@ -14,11 +14,11 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-#include "addressing.h"
+#include "private/addressing.h"
 
 #include <stdio.h>
 
-#include "registers.h"
+#include "private/registers.h"
 
 u16 A_IMP(void) {
     fputs("Error: IMP function called.\n", stderr);

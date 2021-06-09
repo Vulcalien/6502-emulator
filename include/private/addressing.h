@@ -14,29 +14,23 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-#ifndef VULC_6502_EMULATOR_REGISTERS
-#define VULC_6502_EMULATOR_REGISTERS
+#ifndef VULC_6502_EMULATOR_ADDRESSING_P
+#define VULC_6502_EMULATOR_ADDRESSING_P
 
-#include "emulator.h"
+#include "private/emulator.h"
 
-struct processor_flags {
-    u8 c:1; // C - carry flag
-    u8 z:1; // Z - zero flag
-    u8 i:1; // I - interrupt disable
-    u8 d:1; // D - decimal mode
-    u8 b:1; // B - break flag
-    u8  :1; //
-    u8 v:1; // V - overflow flag
-    u8 n:1; // N - negative flag
-};
+u16 A_IMP(void); // implicit
+u16 A_ACC(void); // accumulator
+u16 A_IMM(void); // immediate
+u16 A_ZPG(void); // zero page
+u16 A_ZPX(void); // zero page X
+u16 A_ZPY(void); // zero page Y
+u16 A_REL(void); // relative
+u16 A_ABS(void); // absolute
+u16 A_ABX(void); // absolute X
+u16 A_ABY(void); // absolute Y
+u16 A_IND(void); // indirect
+u16 A_INX(void); // indirect X
+u16 A_INY(void); // indirect Y
 
-extern u16 reg_pc; // PC - program counter
-extern u8  reg_s;  //  S - stack pointer
-extern u8  reg_a;  //  A - acculumator
-extern u8  reg_x;  //  X - X index
-extern u8  reg_y;  //  Y - Y index
-
-// processor flags
-extern struct processor_flags reg_flags;
-
-#endif // VULC_6502_EMULATOR_REGISTERS
+#endif // VULC_6502_EMULATOR_ADDRESSING_P

@@ -17,7 +17,7 @@
 #ifndef VULC_6502_EMULATOR_INSTRUCTIONS
 #define VULC_6502_EMULATOR_INSTRUCTIONS
 
-#include "emulator.h"
+#include "private/emulator.h"
 
 #define INS(x) void x(void)
 

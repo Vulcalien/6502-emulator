@@ -14,12 +14,12 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-#include "emulator.h"
+#include "private/emulator.h"
 
 #include <stdio.h>
 
-#include "registers.h"
-#include "execute.h"
+#include "private/registers.h"
+#include "private/execute.h"
 
 u8 *memory;
 

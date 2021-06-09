@@ -14,10 +14,10 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-#include "instructions.h"
+#include "private/instructions.h"
 
-#include "registers.h"
-#include "memory_io.h"
+#include "private/registers.h"
+#include "private/memory_io.h"
 
 // ADC - add with carry
 INS(ADC) {

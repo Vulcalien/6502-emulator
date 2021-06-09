@@ -14,11 +14,11 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-#include "execute.h"
+#include "private/execute.h"
 
-#include "instructions.h"
-#include "memory_io.h"
-#include "addressing.h"
+#include "private/instructions.h"
+#include "private/memory_io.h"
+#include "private/addressing.h"
 
 #define SET(opcode, inst, addressing_mode)\
             operations[opcode] = (struct operation) {\
