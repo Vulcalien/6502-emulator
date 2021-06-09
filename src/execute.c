@@ -18,25 +18,16 @@
 
 #include "instructions.h"
 #include "memory_io.h"
-
+#include "addressing.h"
 
 #define SET(opcode, inst, addressing_mode)\
             operations[opcode] = (struct operation) {\
                 inst, addressing_mode\
             }
 
-// addressing modes
-#define IMP NULL,          NULL,           NULL
-#define ACC read_byte_acc, NULL, write_byte_acc
-#define IMM read_byte_imm, NULL,           NULL
-// TODO continue...
-
 struct operation {
     void (*inst)(void);
-
-    u8   (*read_byte) (void);
-    u16  (*read_word) (void);
-    void (*write_byte)(u8 byte);
+    u16 (*addressing)(void);
 };
 
 static struct operation *operations;
@@ -44,15 +35,12 @@ static struct operation *operations;
 void execute_init(void) {
     operations = calloc(256, sizeof(struct operation));
 
-    SET(0x00, BRK, IMP);
+    SET(0x00, BRK, A_IMP);
 }
 
 void execute(u8 opcode) {
     struct operation *op = &operations[opcode];
 
-    mem_read_byte = op->read_byte;
-    mem_read_word = op->read_word;
-    mem_write_byte = op->write_byte;
-
+    mem_addressing = op->addressing;
     op->inst();
 }

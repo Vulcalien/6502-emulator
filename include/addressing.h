@@ -14,21 +14,23 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-#ifndef VULC_6502_EMULATOR_CORE
-#define VULC_6502_EMULATOR_CORE
+#ifndef VULC_6502_EMULATOR_ADDRESSING
+#define VULC_6502_EMULATOR_ADDRESSING
 
-#include <stdlib.h>
+#include "emulator.h"
 
-#include "vulcalien/vulcalien.h"
+u16 A_IMP(void); // implicit
+u16 A_ACC(void); // accumulator
+u16 A_IMM(void); // immediate
+u16 A_ZPG(void); // zero page
+u16 A_ZPX(void); // zero page X
+u16 A_ZPY(void); // zero page Y
+u16 A_REL(void); // relative
+u16 A_ABS(void); // absolute
+u16 A_ABX(void); // absolute X
+u16 A_ABY(void); // absolute Y
+u16 A_IND(void); // indirect
+u16 A_INX(void); // indirect X
+u16 A_INY(void); // indirect Y
 
-#define MEMORY_SIZE (0xffff + 1)
-
-#define BYTES_TO_WORD(x, y) (x + (y << 8))
-
-extern u8 *memory;
-
-/* Fetch one byte from memory and increment the program counter.
- * Costs one CPU cycle. */
-extern u8 fetch_byte(void);
-
-#endif // VULC_6502_EMULATOR_CORE
+#endif // VULC_6502_EMULATOR_ADDRESSING

@@ -17,37 +17,28 @@
 #include "memory_io.h"
 
 #include "registers.h"
+#include "addressing.h"
 
-u8  (*mem_read_byte)(void) = NULL;
-u16 (*mem_read_word)(void) = NULL;
+u16 (*mem_addressing)(void) = NULL;
 
-void (*mem_write_byte)(u8 byte) = NULL;
+u8 mem_read_byte(void) {
+    if(mem_addressing == A_ACC)
+        return reg_a;
 
-/* Addressing mode:
- * imp = implicit
- * acc = accumulator
- * imm = immediate
- * zpg = zero page
- * zpx = zero page X
- * zpy = zero page Y
- * rel = relative
- * abs = absolute
- * abx = absolute X
- * aby = absolute Y
- * ind = indirect
- * inx = indirect X
- * iny = indirect Y
- */
+    if(mem_addressing == A_IMM)
+        return fetch_byte();
 
-// ACC - accumulator
-READ_B(read_byte_acc) {
-    return reg_a;
-}
-WRITE_B(write_byte_acc) {
-    reg_a = byte;
+    return memory[mem_addressing()];
 }
 
-// IMM - immediate
-READ_B(read_byte_imm) {
-    return fetch_byte();
+u16 mem_read_word(void) {
+    u16 addr = mem_addressing();
+    return BYTES_TO_WORD(memory[addr], memory[addr + 1]);
+}
+
+void mem_write_byte(u8 byte) {
+    if(mem_addressing == A_ACC)
+        reg_a = byte;
+    else
+        memory[mem_addressing()] = byte;
 }
