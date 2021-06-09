@@ -14,8 +14,8 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-#ifndef VULC_6502_EMULATOR_INSTRUCTIONS
-#define VULC_6502_EMULATOR_INSTRUCTIONS
+#ifndef VULC_6502_EMULATOR_INSTRUCTIONS_P
+#define VULC_6502_EMULATOR_INSTRUCTIONS_P
 
 #include "private/emulator.h"
 
@@ -189,4 +189,4 @@ extern INS(TXS);
 // TYA - transfer Y to accumulator
 extern INS(TYA);
 
-#endif // VULC_6502_EMULATOR_INSTRUCTIONS
+#endif // VULC_6502_EMULATOR_INSTRUCTIONS_P

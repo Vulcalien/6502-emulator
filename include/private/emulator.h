@@ -19,16 +19,12 @@
 
 #include <stdlib.h>
 
+#include "6502_emulator.h"
 #include "vulcalien/vulcalien.h"
-
-#define MEMORY_SIZE (0xffff + 1)
 
 #define BYTES_TO_WORD(lo, hi) (lo | (hi << 8))
 
-extern u8 *memory;
-
-/* Fetch one byte from memory and increment the program counter.
- * Costs one CPU cycle. */
+// Fetch one byte from memory and increment the program counter.
 extern u8 fetch_byte(void);
 
 #endif // VULC_6502_EMULATOR_CORE_P

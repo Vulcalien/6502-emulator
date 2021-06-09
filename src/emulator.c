@@ -16,17 +16,15 @@
  */
 #include "private/emulator.h"
 
-#include <stdio.h>
-
 #include "private/registers.h"
 #include "private/execute.h"
 
-u8 *memory;
+u8 (*read_byte)(u16 addr) = NULL;
+void (*write_byte)(u16 addr, u8 val) = NULL;
 
+/*
 int main(int argc, const char *argv[]) {
     execute_init();
-
-    memory = calloc(MEMORY_SIZE, sizeof(u8));
 
     while(true) {
         execute(fetch_byte());
@@ -42,9 +40,10 @@ int main(int argc, const char *argv[]) {
         // -----
     }
 }
+*/
 
 u8 fetch_byte(void) {
-    u8 result = memory[reg_pc];
+    u8 result = read_byte(reg_pc);
     reg_pc++;
     return result;
 }

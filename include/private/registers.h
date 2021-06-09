@@ -14,8 +14,8 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-#ifndef VULC_6502_EMULATOR_REGISTERS
-#define VULC_6502_EMULATOR_REGISTERS
+#ifndef VULC_6502_EMULATOR_REGISTERS_P
+#define VULC_6502_EMULATOR_REGISTERS_P
 
 #include "private/emulator.h"
 
@@ -39,4 +39,4 @@ extern u8  reg_y;  //  Y - Y index
 // processor flags
 extern struct processor_flags reg_flags;
 
-#endif // VULC_6502_EMULATOR_REGISTERS
+#endif // VULC_6502_EMULATOR_REGISTERS_P

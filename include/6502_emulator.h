@@ -14,13 +14,12 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-#ifndef VULC_6502_EMULATOR_EXECUTE_P
-#define VULC_6502_EMULATOR_EXECUTE_P
+#ifndef VULC_6502_EMULATOR_API
+#define VULC_6502_EMULATOR_API
 
-#include "private/emulator.h"
+#include "vulcalien/vulcalien.h"
 
-extern void execute_init(void);
+extern u8 (*read_byte)(u16 addr);
+extern void (*write_byte)(u16 addr, u8 val);
 
-extern void execute(u8 opcode);
-
-#endif // VULC_6502_EMULATOR_EXECUTE_P
+#endif // VULC_6502_EMULATOR_API

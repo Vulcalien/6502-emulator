@@ -14,8 +14,8 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-#ifndef VULC_6502_EMULATOR_MEMORY_IO
-#define VULC_6502_EMULATOR_MEMORY_IO
+#ifndef VULC_6502_EMULATOR_MEMORY_IO_P
+#define VULC_6502_EMULATOR_MEMORY_IO_P
 
 #include "private/emulator.h"
 
@@ -32,4 +32,4 @@ extern void mem_write_byte(u8 byte);
 extern void mem_set_addressing(u16 (*addr)(void));
 extern void mem_clear_addr_cache(void);
 
-#endif // VULC_6502_EMULATOR_MEMORY_IO
+#endif // VULC_6502_EMULATOR_MEMORY_IO_P
