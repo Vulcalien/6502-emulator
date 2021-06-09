@@ -217,7 +217,7 @@ INS(INY) {
 
 // JMP - jump
 INS(JMP) {
-    // TODO JMP
+    reg_pc = mem_get_addr();
 }
 
 // JSR - jump to subroutine

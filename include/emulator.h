@@ -23,7 +23,7 @@
 
 #define MEMORY_SIZE (0xffff + 1)
 
-#define BYTES_TO_WORD(x, y) (x + (y << 8))
+#define BYTES_TO_WORD(lo, hi) (lo | (hi << 8))
 
 extern u8 *memory;
 

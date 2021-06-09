@@ -23,12 +23,13 @@
 #define READ_W(x)  u16 x(void)
 #define WRITE_B(x) void x(u8 byte)
 
-extern u16 (*mem_addressing)(void);
+extern u16  mem_get_addr(void);
 
 extern u8   mem_read_byte(void);
 extern u16  mem_read_word(void);
 extern void mem_write_byte(u8 byte);
 
+extern void mem_set_addressing(u16 (*addr)(void));
 extern void mem_clear_addr_cache(void);
 
 #endif // VULC_6502_EMULATOR_MEMORY_IO

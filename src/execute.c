@@ -246,7 +246,7 @@ void execute_init(void) {
 void execute(u8 opcode) {
     struct operation *op = &operations[opcode];
 
-    mem_addressing = op->addressing;
+    mem_set_addressing(op->addressing);
     op->inst();
 
     mem_clear_addr_cache();

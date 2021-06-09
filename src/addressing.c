@@ -67,8 +67,9 @@ u16 A_ABY(void) {
 }
 
 u16 A_IND(void) {
-    // TODO - IND
-    return 0;
+    // TODO implement the hardware bug too
+    u16 pointer_addr = BYTES_TO_WORD(fetch_byte(), fetch_byte());
+    return BYTES_TO_WORD(memory[pointer_addr], memory[pointer_addr + 1]);
 }
 
 u16 A_INX(void) {
