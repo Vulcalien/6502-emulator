@@ -43,4 +43,6 @@ void execute(u8 opcode) {
 
     mem_addressing = op->addressing;
     op->inst();
+
+    mem_clear_addr_cache();
 }

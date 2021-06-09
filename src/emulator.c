@@ -16,6 +16,8 @@
  */
 #include "emulator.h"
 
+#include <stdio.h>
+
 #include "registers.h"
 #include "execute.h"
 

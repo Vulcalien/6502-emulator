@@ -21,6 +21,13 @@
 
 u16 (*mem_addressing)(void) = NULL;
 
+// Some instructions need to read and then write to the same address,
+// so store the address and return it instead of fetching more bytes
+static u16 address_cache;
+static bool is_cache_valid = false;
+
+static u16 get_addr(void);
+
 u8 mem_read_byte(void) {
     if(mem_addressing == A_ACC)
         return reg_a;
@@ -28,11 +35,11 @@ u8 mem_read_byte(void) {
     if(mem_addressing == A_IMM)
         return fetch_byte();
 
-    return memory[mem_addressing()];
+    return memory[get_addr()];
 }
 
 u16 mem_read_word(void) {
-    u16 addr = mem_addressing();
+    u16 addr = get_addr();
     return BYTES_TO_WORD(memory[addr], memory[addr + 1]);
 }
 
@@ -40,5 +47,17 @@ void mem_write_byte(u8 byte) {
     if(mem_addressing == A_ACC)
         reg_a = byte;
     else
-        memory[mem_addressing()] = byte;
+        memory[get_addr()] = byte;
+}
+
+void mem_clear_addr_cache(void) {
+    is_cache_valid = false;
+}
+
+static u16 get_addr(void) {
+    if(!is_cache_valid) {
+        is_cache_valid = true;
+        address_cache = mem_addressing();
+    }
+    return address_cache;
 }

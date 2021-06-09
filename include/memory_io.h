@@ -29,4 +29,6 @@ extern u8   mem_read_byte(void);
 extern u16  mem_read_word(void);
 extern void mem_write_byte(u8 byte);
 
+extern void mem_clear_addr_cache(void);
+
 #endif // VULC_6502_EMULATOR_MEMORY_IO

@@ -17,6 +17,7 @@
 #include "instructions.h"
 
 #include "registers.h"
+#include "memory_io.h"
 
 // ADC - add with carry
 INS(ADC) {
@@ -25,9 +26,9 @@ INS(ADC) {
 
 // AND - logical AND
 INS(AND) {
-    u8 v = mem_read_byte();
+    u8 val = mem_read_byte();
 
-    reg_a &= v;
+    reg_a &= val;
 
     reg_flags.z = (reg_a == 0);
     reg_flags.n = (reg_a & 0x80) != 0;
@@ -110,32 +111,54 @@ INS(CLV) {
 
 // CMP - compare
 INS(CMP) {
-    // TODO CMP
+    u8 tocmp = mem_read_byte();
+
+    reg_flags.c = (reg_a >= tocmp);
+    reg_flags.z = (reg_a == tocmp);
+    reg_flags.n = ((reg_a - tocmp) & 0x80) != 0;
 }
 
 // CPX - compare X register
 INS(CPX) {
-    // TODO CPX
+    u8 tocmp = mem_read_byte();
+
+    reg_flags.c = (reg_x >= tocmp);
+    reg_flags.z = (reg_x == tocmp);
+    reg_flags.n = ((reg_x - tocmp) & 0x80) != 0;
 }
 
 // CPY - compare Y register
 INS(CPY) {
-    // TODO CPY
+    u8 tocmp = mem_read_byte();
+
+    reg_flags.c = (reg_y >= tocmp);
+    reg_flags.z = (reg_y == tocmp);
+    reg_flags.n = ((reg_y - tocmp) & 0x80) != 0;
 }
 
 // DEC - decrement memory
 INS(DEC) {
-    // TODO DEC
+    u8 val = mem_read_byte() - 1;
+    mem_write_byte(val);
+
+    reg_flags.z = (val == 0);
+    reg_flags.n = (val & 0x80) != 0;
 }
 
 // DEX - decrement X register
 INS(DEX) {
-    // TODO DEX
+    reg_x--;
+
+    reg_flags.z = (reg_x == 0);
+    reg_flags.n = (reg_x & 0x80) != 0;
 }
 
 // DEY - decrement Y register
 INS(DEY) {
-    // TODO DEY
+    reg_y--;
+
+    reg_flags.z = (reg_y == 0);
+    reg_flags.n = (reg_y & 0x80) != 0;
 }
 
 // EOR - exclusive OR
@@ -145,7 +168,11 @@ INS(EOR) {
 
 // INC - increment memory
 INS(INC) {
-    // TODO INC
+    u8 val = mem_read_byte() + 1;
+    mem_write_byte(val);
+
+    reg_flags.z = (val == 0);
+    reg_flags.n = (val & 0x80) != 0;
 }
 
 // INX - increment X register
