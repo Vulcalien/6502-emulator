@@ -19,8 +19,12 @@
 #include "private/registers.h"
 #include "private/execute.h"
 
-u8 (*read_byte)(u16 addr) = NULL;
-void (*write_byte)(u16 addr, u8 val) = NULL;
+u8 (*cpu_read_byte)(u16 addr) = NULL;
+void (*cpu_write_byte)(u16 addr, u8 val) = NULL;
+
+void cpu_init(void) {
+    execute_init();
+}
 
 /*
 int main(int argc, const char *argv[]) {
@@ -43,7 +47,7 @@ int main(int argc, const char *argv[]) {
 */
 
 u8 fetch_byte(void) {
-    u8 result = read_byte(reg_pc);
+    u8 result = cpu_read_byte(reg_pc);
     reg_pc++;
     return result;
 }

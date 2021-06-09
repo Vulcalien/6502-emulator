@@ -19,7 +19,9 @@
 
 #include "vulcalien/vulcalien.h"
 
-extern u8 (*read_byte)(u16 addr);
-extern void (*write_byte)(u16 addr, u8 val);
+extern u8 (*cpu_read_byte)(u16 addr);
+extern void (*cpu_write_byte)(u16 addr, u8 val);
+
+extern void cpu_init(void);
 
 #endif // VULC_6502_EMULATOR_API

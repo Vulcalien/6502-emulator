@@ -33,19 +33,19 @@ u8 mem_read_byte(void) {
     if(mem_addressing == A_IMM || mem_addressing == A_REL)
         return fetch_byte();
 
-    return read_byte(mem_get_addr());
+    return cpu_read_byte(mem_get_addr());
 }
 
 u16 mem_read_word(void) {
     u16 addr = mem_get_addr();
-    return BYTES_TO_WORD(read_byte(addr), read_byte(addr + 1));
+    return BYTES_TO_WORD(cpu_read_byte(addr), cpu_read_byte(addr + 1));
 }
 
 void mem_write_byte(u8 byte) {
     if(mem_addressing == A_ACC)
         reg_a = byte;
     else
-        write_byte(mem_get_addr(), byte);
+        cpu_write_byte(mem_get_addr(), byte);
 }
 
 void mem_clear_addr_cache(void) {
