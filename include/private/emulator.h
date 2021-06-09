@@ -19,7 +19,7 @@
 
 #include <stdlib.h>
 
-#include "private/vulcalien/vulcalien.h"
+#include "vulcalien/vulcalien.h"
 
 #define MEMORY_SIZE (0xffff + 1)
 
