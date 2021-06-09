@@ -32,7 +32,7 @@ u8 mem_read_byte(void) {
     if(mem_addressing == A_ACC)
         return reg_a;
 
-    if(mem_addressing == A_IMM)
+    if(mem_addressing == A_IMM || mem_addressing == A_REL)
         return fetch_byte();
 
     return memory[get_addr()];

@@ -41,17 +41,26 @@ INS(ASL) {
 
 // BCC - branch if carry clear
 INS(BCC) {
-    // TODO BCC
+    i8 diff = mem_read_byte();
+
+    if(!reg_flags.c)
+        reg_pc += diff;
 }
 
 // BCS - branch if carry set
 INS(BCS) {
-    // TODO BCS
+    i8 diff = mem_read_byte();
+
+    if(reg_flags.c)
+        reg_pc += diff;
 }
 
 // BEQ - branch if equal
 INS(BEQ) {
-    // TODO BEQ
+    i8 diff = mem_read_byte();
+
+    if(reg_flags.z)
+        reg_pc += diff;
 }
 
 // BIT - bit test
@@ -61,17 +70,26 @@ INS(BIT) {
 
 // BMI - branch if minus
 INS(BMI) {
-    // TODO BMI
+    i8 diff = mem_read_byte();
+
+    if(reg_flags.n)
+        reg_pc += diff;
 }
 
 // BNE - branch if not equal
 INS(BNE) {
-    // TODO BNE
+    i8 diff = mem_read_byte();
+
+    if(!reg_flags.z)
+        reg_pc += diff;
 }
 
 // BPL - branch if positive
 INS(BPL) {
-    // TODO BPL
+    i8 diff = mem_read_byte();
+
+    if(!reg_flags.n)
+        reg_pc += diff;
 }
 
 // BRK - force interrupt
@@ -81,12 +99,18 @@ INS(BRK) {
 
 // BVC - branch if overflow clear
 INS(BVC) {
-    // TODO BVC
+    i8 diff = mem_read_byte();
+
+    if(!reg_flags.v)
+        reg_pc += diff;
 }
 
 // BVS - branch if overflow set
 INS(BVS) {
-    // TODO BVS
+    i8 diff = mem_read_byte();
+
+    if(reg_flags.v)
+        reg_pc += diff;
 }
 
 // CLC - clear carry flag
