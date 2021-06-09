@@ -5,7 +5,7 @@
 # Static and Shared libraries
 
 # ========= CONFIG =========
-OUT_FILENAME := 6502-emulator
+OUT_FILENAME := lib6502-emulator
 
 SRC_DIR := src
 OBJ_DIR := obj
