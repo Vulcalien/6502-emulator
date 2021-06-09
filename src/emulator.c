@@ -31,13 +31,15 @@ int main(int argc, const char *argv[]) {
     while(true) {
         execute(fetch_byte());
 
+        // ----- show the zero page graphically
         for(u16 i = 0; i < 16; i++) {
             for(u16 j = 0; j < 16; j++) {
-                printf("%3d ", memory[i + j  * 16]);
+                printf("%2x ", memory[i * 16 + j]);
             }
             putchar('\n');
         }
         getchar();
+        // -----
     }
 }
 
