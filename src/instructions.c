@@ -195,7 +195,12 @@ INS(DEY) {
 
 // EOR - exclusive OR
 INS(EOR) {
-    // TODO EOR
+    u8 val = mem_read_byte();
+
+    reg_a ^= val;
+
+    reg_flags.z = (reg_a == 0);
+    reg_flags.n = (reg_a & 0x80) != 0;
 }
 
 // INC - increment memory
@@ -312,12 +317,30 @@ INS(PLP) {
 
 // ROL - rotate left
 INS(ROL) {
-    // TODO ROL
+    u8 val = mem_read_byte();
+
+    u8 old_c = reg_flags.c;
+    reg_flags.c = (val & 0x80) != 0;
+
+    val = (val << 1) | old_c;
+    mem_write_byte(val);
+
+    reg_flags.z = (val == 0);
+    reg_flags.n = (val & 0x80) != 0;
 }
 
 // ROR - rotate right
 INS(ROR) {
-    // TODO ROR
+    u8 val = mem_read_byte();
+
+    u8 old_c = reg_flags.c;
+    reg_flags.c = (val & 0x01) != 0;
+
+    val = (val >> 1) | (old_c << 7);
+    mem_write_byte(val);
+
+    reg_flags.z = (val == 0);
+    reg_flags.n = (val & 0x80) != 0;
 }
 
 // RTI - return from interrupt
