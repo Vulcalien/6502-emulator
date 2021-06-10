@@ -30,6 +30,21 @@ void cpu_clock(void) {
     execute(fetch_byte());
 }
 
+void cpu_reset(void) {
+    reg_pc = BYTES_TO_WORD(cpu_read_byte(0xfffc), cpu_read_byte(0xfffd));
+}
+
+void cpu_irq(void) {
+    if(reg_flags.i)
+        return;
+
+    // TODO irq
+}
+
+void cpu_nmi(void) {
+    // TODO nmi
+}
+
 /*
 int main(int argc, const char *argv[]) {
     execute_init();

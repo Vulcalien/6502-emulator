@@ -28,4 +28,15 @@ extern void cpu_init(void);
 // this is not an actual clock, but a whole instruction
 extern void cpu_clock(void);
 
+// execute a reset
+// this sets the program counter register to
+// whatever is in memory at 0xfffc, 0xfffd
+extern void cpu_reset(void);
+
+// execute an interrupt only if the interrupt disable flag is clear
+extern void cpu_irq(void);
+
+// execute an interrupt, no conditions
+extern void cpu_nmi(void);
+
 #endif // VULC_6502_EMULATOR_API
