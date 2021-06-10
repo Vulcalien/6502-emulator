@@ -265,22 +265,28 @@ INS(ORA) {
 
 // PHA - push accumulator
 INS(PHA) {
-    // TODO PHA
+    cpu_write_memory(0x100 + reg_s, reg_a);
+    reg_s--;
 }
 
 // PHP - push processor status
 INS(PHP) {
-    // TODO PHP
+    // TODO make sure this works
+    cpu_write_memory(0x100 + reg_s, (u8) reg_flags);
+    reg_s--;
 }
 
 // PLA - pull accumulator
 INS(PLA) {
-    // TODO PLA
+    reg_s++;
+    reg_a = cpu_read_memory(0x100 + reg_s);
 }
 
 // PLP - pull processor status
 INS(PLP) {
-    // TODO PLP
+    reg_s++;
+    reg_flags = cpu_read_memory(0x100 + reg_s);
+    // TODO make sure this works
 }
 
 // ROL - rotate left
