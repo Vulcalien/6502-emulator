@@ -22,4 +22,4 @@ u8  reg_a;
 u8  reg_x;
 u8  reg_y;
 
-struct processor_flags reg_flags;
+union processor_flags reg_flags;

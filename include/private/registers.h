@@ -19,15 +19,18 @@
 
 #include "private/emulator.h"
 
-struct processor_flags {
-    u8 c:1; // C - carry flag
-    u8 z:1; // Z - zero flag
-    u8 i:1; // I - interrupt disable
-    u8 d:1; // D - decimal mode
-    u8 b:1; // B - break flag
-    u8  :1; //
-    u8 v:1; // V - overflow flag
-    u8 n:1; // N - negative flag
+union processor_flags {
+    struct {
+        u8 c:1; // C - carry flag
+        u8 z:1; // Z - zero flag
+        u8 i:1; // I - interrupt disable
+        u8 d:1; // D - decimal mode
+        u8 b:1; // B - break flag
+        u8  :1; //
+        u8 v:1; // V - overflow flag
+        u8 n:1; // N - negative flag
+    };
+    u8 as_byte;
 };
 
 extern u16 reg_pc; // PC - program counter
@@ -37,6 +40,6 @@ extern u8  reg_x;  //  X - X index
 extern u8  reg_y;  //  Y - Y index
 
 // processor flags
-extern struct processor_flags reg_flags;
+extern union processor_flags reg_flags;
 
 #endif // VULC_6502_EMULATOR_REGISTERS_P
