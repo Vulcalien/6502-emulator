@@ -22,7 +22,7 @@
 u8 (*cpu_read_byte)(u16 addr) = NULL;
 void (*cpu_write_byte)(u16 addr, u8 val) = NULL;
 
-void cpu_init(void) {
+void cpu_library_init(void) {
     execute_init();
 }
 
