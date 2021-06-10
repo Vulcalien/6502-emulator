@@ -22,7 +22,7 @@
 #include "6502_emulator.h"
 #include "vulcalien/vulcalien.h"
 
-#define BYTES_TO_WORD(lo, hi) (lo | (hi << 8))
+#define BYTES_TO_WORD(lo, hi) ((lo) | ((hi) << 8))
 
 // Fetch one byte from memory and increment the program counter.
 extern u8 fetch_byte(void);
