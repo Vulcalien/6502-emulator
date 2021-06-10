@@ -36,7 +36,15 @@ INS(AND) {
 
 // ASL - arithmetic shift left
 INS(ASL) {
-    // TODO ASL
+    u8 val = mem_read_byte();
+
+    reg_flags.c = (val & 0x80) != 0;
+
+    val <<= 1;
+    mem_write_byte(val);
+
+    reg_flags.z = (val == 0);
+    reg_flags.n = (val & 0x80) != 0;
 }
 
 // BCC - branch if carry clear
@@ -251,7 +259,15 @@ INS(LDY) {
 
 // LSR - logical shift right
 INS(LSR) {
-    // TODO LSR
+    u8 val = mem_read_byte();
+
+    reg_flags.c = (val & 0x01) != 0;
+
+    val >>= 1;
+    mem_write_byte(val);
+
+    reg_flags.z = (val == 0);
+    reg_flags.n = (val & 0x80) != 0;
 }
 
 // NOP - no operation
@@ -260,7 +276,12 @@ INS(NOP) {
 
 // ORA - logical inclusive OR
 INS(ORA) {
-    // TODO ORA
+    u8 val = mem_read_byte();
+
+    reg_a |= val;
+
+    reg_flags.z = (reg_a == 0);
+    reg_flags.n = (reg_a & 0x80) != 0;
 }
 
 // PHA - push accumulator
