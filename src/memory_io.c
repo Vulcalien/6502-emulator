@@ -64,8 +64,7 @@ u8 stack_pull_byte(void) {
 }
 
 u16 stack_pull_word(void) {
-    // TODO pull word
-    return -1;
+    return BYTES_TO_WORD(stack_pull_byte(), stack_pull_byte());
 }
 
 void stack_push_byte(u8 byte) {
@@ -74,7 +73,8 @@ void stack_push_byte(u8 byte) {
 }
 
 void stack_push_word(u16 word) {
-    // TODO push word
+    stack_push_byte(word >> 8);
+    stack_push_byte(word);
 }
 
 // addressing
