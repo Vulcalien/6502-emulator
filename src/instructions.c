@@ -348,7 +348,10 @@ INS(ROR) {
 
 // RTI - return from interrupt
 INS(RTI) {
-    // TODO RTI
+    reg_flags.as_byte = stack_pull_byte();
+    reg_flags.u = 1;
+
+    reg_pc = stack_pull_word();
 }
 
 // RTS - return from subroutine
