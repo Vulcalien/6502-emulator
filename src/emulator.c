@@ -18,6 +18,7 @@
 
 #include "private/registers.h"
 #include "private/execute.h"
+#include "private/memory_io.h"
 
 u8 (*cpu_read_byte)(u16 addr) = NULL;
 void (*cpu_write_byte)(u16 addr, u8 val) = NULL;
