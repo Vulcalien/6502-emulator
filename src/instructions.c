@@ -235,7 +235,10 @@ INS(JMP) {
 
 // JSR - jump to subroutine
 INS(JSR) {
-    // TODO JSR
+    u16 addr = mem_get_addr();
+
+    stack_push_word(reg_pc - 1);
+    reg_pc = addr;
 }
 
 // LDA - load accumulator
@@ -346,7 +349,7 @@ INS(RTI) {
 
 // RTS - return from subroutine
 INS(RTS) {
-    // TODO RTS
+    reg_pc = stack_pull_word() + 1;
 }
 
 // SBC - subtract with carry
