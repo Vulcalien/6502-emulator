@@ -21,17 +21,17 @@
 #include "private/registers.h"
 
 u16 A_IMP(void) {
-    fputs("Error: IMP function called.\n", stderr);
+    fputs("6502 Error: A_IMP function called.\n", stderr);
     return 0;
 }
 
 u16 A_ACC(void) {
-    fputs("Error: ACC function called.\n", stderr);
+    fputs("6502 Error: A_ACC function called.\n", stderr);
     return 0;
 }
 
 u16 A_IMM(void) {
-    fputs("Error: IMM function called.\n", stderr);
+    fputs("6502 Error: A_IMM function called.\n", stderr);
     return 0;
 }
 
@@ -50,7 +50,7 @@ u16 A_ZPY(void) {
 }
 
 u16 A_REL(void) {
-    fputs("Error: REL function called.\n", stderr);
+    fputs("6502 Error: A_REL function called.\n", stderr);
     return 0;
 }
 

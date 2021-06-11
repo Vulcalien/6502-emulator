@@ -20,17 +20,26 @@
 #include "private/memory_io.h"
 #include "private/addressing.h"
 
-#define SET(opcode, inst, addressing_mode)\
-            operations[opcode] = (struct operation) {\
-                inst, addressing_mode\
-            }
-
 struct operation {
     void (*inst)(void);
     u16 (*addressing)(void);
 };
 
 static struct operation *operations;
+
+#define SET(opcode, inst, addressing_mode)\
+            operations[opcode] = (struct operation) {\
+                inst, addressing_mode\
+            }
+
+void execute(u8 opcode) {
+    struct operation *op = &operations[opcode];
+
+    mem_set_addressing(op->addressing);
+    op->inst();
+
+    mem_clear_addr_cache();
+}
 
 void execute_init(void) {
     operations = calloc(256, sizeof(struct operation));
@@ -241,13 +250,4 @@ void execute_init(void) {
     SET(0x9a, TXS, A_IMP);
 
     SET(0x98, TYA, A_IMP);
-}
-
-void execute(u8 opcode) {
-    struct operation *op = &operations[opcode];
-
-    mem_set_addressing(op->addressing);
-    op->inst();
-
-    mem_clear_addr_cache();
 }

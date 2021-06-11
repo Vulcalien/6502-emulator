@@ -29,8 +29,6 @@ extern void cpu_library_init(void);
 extern void cpu_clock(void);
 
 // execute a reset
-// this sets the program counter register to
-// whatever is in memory at 0xfffc, 0xfffd
 extern void cpu_reset(void);
 
 // execute an interrupt only if the interrupt disable flag is clear

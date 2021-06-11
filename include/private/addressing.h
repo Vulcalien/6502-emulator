@@ -30,7 +30,7 @@ u16 A_ABS(void); // absolute
 u16 A_ABX(void); // absolute X
 u16 A_ABY(void); // absolute Y
 u16 A_IND(void); // indirect
-u16 A_INX(void); // indirect X
-u16 A_INY(void); // indirect Y
+u16 A_INX(void); // (indirect,X)
+u16 A_INY(void); // (indirect),Y
 
 #endif // VULC_6502_EMULATOR_ADDRESSING_P

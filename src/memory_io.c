@@ -26,6 +26,15 @@ static u16 (*mem_addressing)(void) = NULL;
 static u16 address_cache;
 static bool is_cache_valid = false;
 
+u16 mem_get_addr(void) {
+    if(!is_cache_valid) {
+        is_cache_valid = true;
+        address_cache = mem_addressing();
+    }
+    return address_cache;
+}
+
+// read/write
 u8 mem_read_byte(void) {
     if(mem_addressing == A_ACC)
         return reg_a;
@@ -48,18 +57,11 @@ void mem_write_byte(u8 byte) {
         cpu_write_byte(mem_get_addr(), byte);
 }
 
-void mem_clear_addr_cache(void) {
-    is_cache_valid = false;
-}
-
+// addressing
 void mem_set_addressing(u16 (*addr)(void)) {
     mem_addressing = addr;
 }
 
-u16 mem_get_addr(void) {
-    if(!is_cache_valid) {
-        is_cache_valid = true;
-        address_cache = mem_addressing();
-    }
-    return address_cache;
+void mem_clear_addr_cache(void) {
+    is_cache_valid = false;
 }

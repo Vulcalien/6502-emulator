@@ -19,8 +19,8 @@
 
 #include "private/emulator.h"
 
-extern void execute_init(void);
-
 extern void execute(u8 opcode);
+
+extern void execute_init(void);
 
 #endif // VULC_6502_EMULATOR_EXECUTE_P
