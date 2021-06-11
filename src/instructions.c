@@ -73,7 +73,11 @@ INS(BEQ) {
 
 // BIT - bit test
 INS(BIT) {
-    // TODO BIT
+    u8 val = mem_read_byte();
+
+    reg_flags.z = (reg_a & val) == 0;
+    reg_flags.v = (val & 0x40) != 0;
+    reg_flags.n = (val & 0x80) != 0;
 }
 
 // BMI - branch if minus
