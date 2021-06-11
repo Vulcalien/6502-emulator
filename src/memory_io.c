@@ -57,6 +57,26 @@ void mem_write_byte(u8 byte) {
         cpu_write_byte(mem_get_addr(), byte);
 }
 
+// stack
+u8 stack_pull_byte(void) {
+    reg_s++;
+    return cpu_read_byte(0x100 + reg_s);
+}
+
+u16 stack_pull_word(void) {
+    // TODO pull word
+    return -1;
+}
+
+void stack_push_byte(u8 byte) {
+    cpu_write_byte(0x100 + reg_s, byte);
+    reg_s--;
+}
+
+void stack_push_word(u16 word) {
+    // TODO push word
+}
+
 // addressing
 void mem_set_addressing(u16 (*addr)(void)) {
     mem_addressing = addr;

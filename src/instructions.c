@@ -291,27 +291,23 @@ INS(ORA) {
 
 // PHA - push accumulator
 INS(PHA) {
-    cpu_write_byte(0x100 + reg_s, reg_a);
-    reg_s--;
+    stack_push_byte(reg_a);
 }
 
 // PHP - push processor status
 INS(PHP) {
     // TODO make sure this works
-    cpu_write_byte(0x100 + reg_s, reg_flags.as_byte);
-    reg_s--;
+    stack_push_byte(reg_flags.as_byte);
 }
 
 // PLA - pull accumulator
 INS(PLA) {
-    reg_s++;
-    reg_a = cpu_read_byte(0x100 + reg_s);
+    reg_a = stack_pull_byte();
 }
 
 // PLP - pull processor status
 INS(PLP) {
-    reg_s++;
-    reg_flags.as_byte = cpu_read_byte(0x100 + reg_s);
+    reg_flags.as_byte = stack_pull_byte();
     // TODO make sure this works
 }
 
