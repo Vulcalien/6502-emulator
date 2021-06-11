@@ -299,7 +299,7 @@ INS(PHA) {
 
 // PHP - push processor status
 INS(PHP) {
-    // TODO make sure this works
+    reg_flags.u = 1;
     stack_push_byte(reg_flags.as_byte);
 }
 
@@ -311,7 +311,7 @@ INS(PLA) {
 // PLP - pull processor status
 INS(PLP) {
     reg_flags.as_byte = stack_pull_byte();
-    // TODO make sure this works
+    reg_flags.u = 1;
 }
 
 // ROL - rotate left

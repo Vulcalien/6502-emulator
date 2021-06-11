@@ -26,7 +26,7 @@ union processor_flags {
         u8 i:1; // I - interrupt disable
         u8 d:1; // D - decimal mode
         u8 b:1; // B - break flag
-        u8  :1; //
+        u8 u:1; // U - unused
         u8 v:1; // V - overflow flag
         u8 n:1; // N - negative flag
     };
