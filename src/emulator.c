@@ -38,11 +38,23 @@ void cpu_irq(void) {
     if(reg_flags.i)
         return;
 
-    // TODO irq
+    stack_push_word(reg_pc);
+
+    reg_flags.u = 1;
+    stack_push_byte(reg_flags.as_byte);
+
+    reg_flags.i = 1;
+    reg_pc = BYTES_TO_WORD(cpu_read_byte(0xfffe), cpu_read_byte(0xffff));
 }
 
 void cpu_nmi(void) {
-    // TODO nmi
+    stack_push_word(reg_pc);
+
+    reg_flags.u = 1;
+    stack_push_byte(reg_flags.as_byte);
+
+    reg_flags.i = 1;
+    reg_pc = BYTES_TO_WORD(cpu_read_byte(0xfffa), cpu_read_byte(0xfffb));
 }
 
 /*
