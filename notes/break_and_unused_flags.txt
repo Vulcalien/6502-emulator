@@ -1,0 +1,19 @@
+The 6502 has 6 real flags. Each flag is 1-bit, but together they can
+be considered as one 8-bit register: P, the Processor Status register.
+When pushing the P register, however, 2 more bits are written: the B
+flag (bit 4) and the U flag (bit 5).
+
+The B flag is the Break Command flag, while the U flag is an Unused flag.
+
+The U flag is always set to 1, when pushing the P register to the stack.
+The B flag was harder to understand, and I had to research a *bit*
+(research a bit, what a joke...) to be sure that my emulator was built
+correctly.
+What I read can be summed up like this: the B flag only exists when
+writing to memory, and its value is 1 if written by a PHP and BRK and
+0 when written by IRQ and NMI.
+
+PHP and BRK, the software instructions, will always and in any context
+write a B flag of value 1.
+IRQ and NMi, the hardware-requested instructions, will always and in
+any context write a B flag of value 0.

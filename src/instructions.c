@@ -303,6 +303,7 @@ INS(PHA) {
 
 // PHP - push processor status
 INS(PHP) {
+    reg_flags.b = 1;
     reg_flags.u = 1;
     stack_push_byte(reg_flags.as_byte);
 }
@@ -315,6 +316,7 @@ INS(PLA) {
 // PLP - pull processor status
 INS(PLP) {
     reg_flags.as_byte = stack_pull_byte();
+    reg_flags.b = 1;
     reg_flags.u = 1;
 }
 
@@ -349,6 +351,7 @@ INS(ROR) {
 // RTI - return from interrupt
 INS(RTI) {
     reg_flags.as_byte = stack_pull_byte();
+    reg_flags.b = 1;
     reg_flags.u = 1;
 
     reg_pc = stack_pull_word();
