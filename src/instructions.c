@@ -106,7 +106,16 @@ INS(BPL) {
 
 // BRK - force interrupt
 INS(BRK) {
-    // TODO BRK
+    fetch_byte();
+
+    stack_push_word(reg_pc);
+
+    reg_flags.b = 1;
+    reg_flags.u = 1;
+    stack_push_byte(reg_flags.as_byte);
+
+    reg_flags.i = 1;
+    reg_pc = BYTES_TO_WORD(cpu_read_byte(0xfffe), cpu_read_byte(0xffff));
 }
 
 // BVC - branch if overflow clear

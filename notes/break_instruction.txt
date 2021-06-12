@@ -1,0 +1,16 @@
+The information I found regarding the break instruction were very
+different from each other. One thing that all of the sources agreed
+on is that the BRK instruction points to the *second* byte after the
+BRK address, so that there actually is a useless byte after it.
+
+It's important to note that the useless byte is read anyway, even
+if its value is not used anywhere.
+
+Another thing that I wasn't sure about is whenever or not BRK is
+executed even if the I flag is 1.
+I've tested [Visual 6502](http://www.visual6502.org/) and it seems to
+ignore the I flag, so that a BRK is always executed.
+
+The last doubt was about setting or not the I flag, after pushing the
+processor status to the stack. Only one source I read explicitly said
+that the I flag is set to 1. Testing on the Visual 6502 confirmed that.
