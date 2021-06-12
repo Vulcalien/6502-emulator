@@ -58,26 +58,6 @@ void cpu_nmi(void) {
     reg_pc = BYTES_TO_WORD(cpu_read_byte(0xfffa), cpu_read_byte(0xfffb));
 }
 
-/*
-int main(int argc, const char *argv[]) {
-    execute_init();
-
-    while(true) {
-        execute(fetch_byte());
-
-        // ----- show the zero page graphically
-        for(u16 i = 0; i < 16; i++) {
-            for(u16 j = 0; j < 16; j++) {
-                printf("%2x ", memory[i * 16 + j]);
-            }
-            putchar('\n');
-        }
-        getchar();
-        // -----
-    }
-}
-*/
-
 u8 fetch_byte(void) {
     u8 result = cpu_read_byte(reg_pc);
     reg_pc++;
