@@ -18,9 +18,25 @@
 #include "private/registers.h"
 #include "private/memory_io.h"
 
+static void add_operation(u8 to_add) {
+    if(reg_flags.d) {
+        // TODO implement decimal mode
+    } else {
+        u8 old_a = reg_a;
+
+        u16 tmp = reg_a + to_add;
+        reg_a = tmp; // <u8> <- <u16>
+
+        reg_flags.c = (tmp & 0xff00) != 0;
+        reg_flags.z = (reg_a == 0);
+        reg_flags.v = ((old_a ^ reg_a) & (to_add ^ reg_a) & 0x80) != 0;
+        reg_flags.n = (reg_a & 0x80) != 0;
+    }
+}
+
 // ADC - add with carry
 INS(ADC) {
-    // TODO ADC
+    add_operation(mem_read_byte() + reg_flags.c);
 }
 
 // AND - logical AND
@@ -372,7 +388,7 @@ INS(RTS) {
 
 // SBC - subtract with carry
 INS(SBC) {
-    // TODO SBC
+    add_operation(-mem_read_byte() - !reg_flags.c);
 }
 
 // SEC - set carry flag
