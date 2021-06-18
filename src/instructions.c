@@ -335,6 +335,9 @@ INS(PHP) {
 // PLA - pull accumulator
 INS(PLA) {
     reg_a = stack_pull_byte();
+
+    reg_flags.z = (reg_a == 0);
+    reg_flags.n = (reg_a & 0x80) != 0;
 }
 
 // PLP - pull processor status
