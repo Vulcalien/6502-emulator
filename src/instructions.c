@@ -124,9 +124,6 @@ INS(BRK) {
     fetch_byte();
 
     stack_push_word(reg_pc);
-
-    reg_flags.b = 1;
-    reg_flags.u = 1;
     stack_push_byte(reg_flags.as_byte);
 
     reg_flags.i = 1;
@@ -327,8 +324,6 @@ INS(PHA) {
 
 // PHP - push processor status
 INS(PHP) {
-    reg_flags.b = 1;
-    reg_flags.u = 1;
     stack_push_byte(reg_flags.as_byte);
 }
 

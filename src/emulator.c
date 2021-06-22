@@ -42,7 +42,6 @@ void cpu_irq(void) {
     stack_push_word(reg_pc);
 
     reg_flags.b = 0;
-    reg_flags.u = 1;
     stack_push_byte(reg_flags.as_byte);
     reg_flags.b = 1;
 
@@ -54,7 +53,6 @@ void cpu_nmi(void) {
     stack_push_word(reg_pc);
 
     reg_flags.b = 0;
-    reg_flags.u = 1;
     stack_push_byte(reg_flags.as_byte);
     reg_flags.b = 1;
 
