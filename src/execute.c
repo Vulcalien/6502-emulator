@@ -31,7 +31,7 @@ static struct operation *operations;
                 inst, addressing_mode\
             }
 
-void execute(u8 opcode) {
+void cpu_execute(u8 opcode) {
     struct operation *op = &operations[opcode];
 
     mem_set_addressing(op->addressing);
@@ -40,7 +40,7 @@ void execute(u8 opcode) {
     mem_clear_addr_cache();
 }
 
-void execute_init(void) {
+void cpu_execute_init(void) {
     operations = calloc(256, sizeof(struct operation));
 
     SET(0x69, ADC, A_IMM);

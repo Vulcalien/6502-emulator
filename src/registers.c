@@ -15,10 +15,15 @@
  */
 #include "private/registers.h"
 
-u16 reg_pc;
-u8  reg_s;
-u8  reg_a;
-u8  reg_x;
-u8  reg_y;
+u16 reg_pc = 0;
+u8  reg_s  = 0;
+u8  reg_a  = 0;
+u8  reg_x  = 0;
+u8  reg_y  = 0;
 
-union processor_flags reg_flags;
+union processor_flags reg_flags = {0};
+
+void cpu_registers_init(void) {
+    reg_flags.b = 1;
+    reg_flags.u = 1;
+}

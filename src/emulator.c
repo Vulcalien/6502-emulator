@@ -23,11 +23,12 @@ u8 (*cpu_read_byte)(u16 addr) = NULL;
 void (*cpu_write_byte)(u16 addr, u8 val) = NULL;
 
 void cpu_library_init(void) {
-    execute_init();
+    cpu_execute_init();
+    cpu_registers_init();
 }
 
 void cpu_clock(void) {
-    execute(fetch_byte());
+    cpu_execute(fetch_byte());
 }
 
 void cpu_reset(void) {

@@ -41,4 +41,6 @@ extern u8  reg_y;  //  Y - Y index
 // processor flags
 extern union processor_flags reg_flags;
 
+extern void cpu_registers_init(void);
+
 #endif // VULC_6502_EMULATOR_REGISTERS_P
