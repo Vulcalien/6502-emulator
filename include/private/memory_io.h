@@ -29,6 +29,5 @@ extern void stack_push_byte(u8 byte);
 extern void stack_push_word(u16 word);
 
 extern void mem_set_addressing(u16 (*addr)(void));
-extern void mem_clear_addr_cache(void);
 
 #endif // VULC_6502_EMULATOR_MEMORY_IO_P
