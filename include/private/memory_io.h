@@ -18,10 +18,6 @@
 
 #include "private/emulator.h"
 
-#define READ_B(x)  u8  x(void)
-#define READ_W(x)  u16 x(void)
-#define WRITE_B(x) void x(u8 byte)
-
 extern u16  mem_get_addr(void);
 
 extern u8   mem_read_byte(void);

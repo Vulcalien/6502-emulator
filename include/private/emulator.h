@@ -19,7 +19,6 @@
 #include <stdlib.h>
 
 #include "6502_emulator.h"
-#include "vulcalien/vulcalien.h"
 
 #define BYTES_TO_WORD(lo, hi) ((lo) | ((hi) << 8))
 
