@@ -44,11 +44,6 @@ u8 mem_read_byte(void) {
     return cpu_read_byte(mem_get_addr());
 }
 
-u16 mem_read_word(void) {
-    u16 addr = mem_get_addr();
-    return BYTES_TO_WORD(cpu_read_byte(addr), cpu_read_byte(addr + 1));
-}
-
 void mem_write_byte(u8 byte) {
     if(mem_addressing == A_ACC)
         reg_a = byte;
@@ -79,8 +74,5 @@ void stack_push_word(u16 word) {
 // addressing
 void mem_set_addressing(u16 (*addr)(void)) {
     mem_addressing = addr;
-}
-
-void mem_clear_addr_cache(void) {
     is_cache_valid = false;
 }

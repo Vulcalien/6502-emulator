@@ -36,8 +36,6 @@ void cpu_execute(u8 opcode) {
 
     mem_set_addressing(op->addressing);
     op->inst();
-
-    mem_clear_addr_cache();
 }
 
 void cpu_execute_init(void) {

@@ -21,7 +21,6 @@
 extern u16  mem_get_addr(void);
 
 extern u8   mem_read_byte(void);
-extern u16  mem_read_word(void);
 extern void mem_write_byte(u8 byte);
 
 extern u8   stack_pull_byte(void);
