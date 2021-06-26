@@ -15,6 +15,8 @@
  */
 #include "private/emulator.h"
 
+#include <stdio.h>
+
 #include "private/registers.h"
 #include "private/execute.h"
 #include "private/memory_io.h"
@@ -25,6 +27,11 @@ void (*cpu_write_byte)(u16 addr, u8 val) = NULL;
 void cpu_library_init(void) {
     cpu_execute_init();
     cpu_registers_init();
+}
+
+void cpu_debug_print_registers(FILE *stream) {
+    fprintf(stream, "PC: %x, P: %x\n", reg_pc, reg_flags.as_byte);
+    fprintf(stream, "A: %x, X: %x, Y: %x\n", reg_a, reg_x, reg_y);
 }
 
 void cpu_clock(void) {
