@@ -14,7 +14,7 @@ BIN_DIR := bin
 OBJ_STATIC_DIR := $(OBJ_DIR)/static
 OBJ_SHARED_DIR := $(OBJ_DIR)/shared
 
-CPPFLAGS := -Iinclude -MMD -MP
+CPPFLAGS := -Iinclude -Iinclude/lib -MMD -MP
 
 CFLAGS_STATIC := -Wall -pedantic
 CFLAGS_SHARED := -fPIC -Wall -pedantic
