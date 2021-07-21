@@ -66,9 +66,11 @@ u16 A_ABY(void) {
 }
 
 u16 A_IND(void) {
-    // TODO implement the hardware bug too
     u16 ptr_addr = BYTES_TO_WORD(fetch_byte(), fetch_byte());
-    return BYTES_TO_WORD(cpu_read_byte(ptr_addr), cpu_read_byte(ptr_addr + 1));
+    return BYTES_TO_WORD(
+        cpu_read_byte(ptr_addr),
+        cpu_read_byte((ptr_addr & 0xff00) | ((ptr_addr + 1) & 0xff))
+    );
 }
 
 u16 A_INX(void) {
