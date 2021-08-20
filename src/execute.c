@@ -31,14 +31,14 @@ static struct operation *operations;
                 inst, addressing_mode\
             }
 
-void cpu_execute(u8 opcode) {
+void execute(u8 opcode) {
     struct operation *op = &operations[opcode];
 
     mem_set_addressing(op->addressing);
     op->inst();
 }
 
-void cpu_execute_init(void) {
+void execute_init(void) {
     operations = calloc(256, sizeof(struct operation));
 
     SET(0x69, ADC, A_IMM);

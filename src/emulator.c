@@ -21,28 +21,28 @@
 #include "private/execute.h"
 #include "private/memory_io.h"
 
-u8 (*cpu_read_byte)(u16 addr) = NULL;
-void (*cpu_write_byte)(u16 addr, u8 val) = NULL;
+EXPORT u8 (*cpu_read_byte)(u16 addr) = NULL;
+EXPORT void (*cpu_write_byte)(u16 addr, u8 val) = NULL;
 
-void cpu_library_init(void) {
-    cpu_execute_init();
-    cpu_registers_init();
+EXPORT void cpu_library_init(void) {
+    execute_init();
+    registers_init();
 }
 
-void cpu_debug_print_registers(FILE *stream) {
+EXPORT void cpu_debug_print_registers(FILE *stream) {
     fprintf(stream, "PC: %x, P: %x\n", reg_pc, reg_flags.as_byte);
     fprintf(stream, "A: %x, X: %x, Y: %x\n", reg_a, reg_x, reg_y);
 }
 
-void cpu_clock(void) {
-    cpu_execute(fetch_byte());
+EXPORT void cpu_clock(void) {
+    execute(fetch_byte());
 }
 
-void cpu_reset(void) {
+EXPORT void cpu_reset(void) {
     reg_pc = BYTES_TO_WORD(cpu_read_byte(0xfffc), cpu_read_byte(0xfffd));
 }
 
-void cpu_irq(void) {
+EXPORT void cpu_irq(void) {
     if(reg_flags.i)
         return;
 
@@ -56,7 +56,7 @@ void cpu_irq(void) {
     reg_pc = BYTES_TO_WORD(cpu_read_byte(0xfffe), cpu_read_byte(0xffff));
 }
 
-void cpu_nmi(void) {
+EXPORT void cpu_nmi(void) {
     stack_push_word(reg_pc);
 
     reg_flags.b = 0;

@@ -20,6 +20,8 @@
 
 #include "6502_emulator.h"
 
+#define EXPORT __attribute__ ((visibility ("default")))
+
 #define BYTES_TO_WORD(lo, hi) ((lo) | ((hi) << 8))
 
 // Fetch one byte from memory and increment the program counter.

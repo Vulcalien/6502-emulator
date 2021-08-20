@@ -23,7 +23,7 @@ u8  reg_y  = 0;
 
 union processor_flags reg_flags = {0};
 
-void cpu_registers_init(void) {
+void registers_init(void) {
     reg_flags.b = 1;
     reg_flags.u = 1;
 }
