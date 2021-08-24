@@ -1,10 +1,17 @@
 # Vulcalien's Library Makefile
-# version 0.1.3 (modified)
+# version 0.1.6 (modified)
 #
 # This Makefile can create both
 # Static and Shared libraries
 
-# ========= CONFIG =========
+# === TARGET OS ===
+ifeq ($(OS),Windows_NT)
+	TARGET_OS := WINDOWS
+else
+	TARGET_OS := UNIX
+endif
+
+# ========= EDIT HERE =========
 OUT_FILENAME := lib6502-emulator
 
 SRC_DIR := src
@@ -19,56 +26,47 @@ CPPFLAGS := -Iinclude -Iinclude/lib -MMD -MP
 CFLAGS_STATIC := -Wall -pedantic
 CFLAGS_SHARED := -fPIC -fvisibility=hidden -Wall -pedantic
 
-# Unix LDFLAGS and LDLIBS
-UNI_LDFLAGS := -shared -Llib
-UNI_LDLIBS  :=
+ifeq ($(TARGET_OS),UNIX)
+	# UNIX
+	LDFLAGS := -shared -Llib
+	LDLIBS  :=
+else ifeq ($(TARGET_OS),WINDOWS)
+	# WINDOWS
+	LDFLAGS := -shared -Llib
+	LDLIBS  :=
+endif
+# =============================
 
-# Windows LDFLAGS and LDLIBS
-WIN_LDFLAGS := -shared -Llib
-WIN_LDLIBS  :=
-
-# ========= OS SPECIFIC =========
-UNI_OBJ_EXT    := .o
-UNI_STATIC_EXT := .a
-UNI_SHARED_EXT := .so
-
-WIN_OBJ_EXT    := .obj
-WIN_STATIC_EXT := -win.a
-WIN_SHARED_EXT := .dll
-
-ifeq ($(OS),Windows_NT)
+# === OS SPECIFIC ===
+ifeq ($(TARGET_OS),UNIX)
+	# UNIX
 	CC := gcc
 
-	OBJ_EXT    := $(WIN_OBJ_EXT)
-	STATIC_EXT := $(WIN_STATIC_EXT)
-	SHARED_EXT := $(WIN_SHARED_EXT)
-
-	LDFLAGS := $(WIN_LDFLAGS)
-	LDLIBS  := $(WIN_LDLIBS)
-
-	MKDIR      := mkdir
-	MKDIRFLAGS :=
-
-	RM      := del
-	RMFLAGS := /Q /S
-else
-	CC := gcc
-
-	OBJ_EXT    := $(UNI_OBJ_EXT)
-	STATIC_EXT := $(UNI_STATIC_EXT)
-	SHARED_EXT := $(UNI_SHARED_EXT)
-
-	LDFLAGS := $(UNI_LDFLAGS)
-	LDLIBS  := $(UNI_LDLIBS)
+	OBJ_EXT    := .o
+	STATIC_EXT := .a
+	SHARED_EXT := .so
 
 	MKDIR      := mkdir
 	MKDIRFLAGS := -p
 
 	RM      := rm
 	RMFLAGS := -rfv
+else ifeq ($(TARGET_OS),WINDOWS)
+	# WINDOWS
+	CC := gcc
+
+	OBJ_EXT    := .obj
+	STATIC_EXT := -win.a
+	SHARED_EXT := .dll
+
+	MKDIR      := mkdir
+	MKDIRFLAGS :=
+
+	RM      := del
+	RMFLAGS := /Q /S
 endif
 
-# ========= OTHER =========
+# === OTHER ===
 SRC := $(wildcard $(SRC_DIR)/*.c)
 
 OBJ_STATIC := $(SRC:$(SRC_DIR)/%.c=$(OBJ_STATIC_DIR)/%$(OBJ_EXT))
@@ -77,6 +75,7 @@ OBJ_SHARED := $(SRC:$(SRC_DIR)/%.c=$(OBJ_SHARED_DIR)/%$(OBJ_EXT))
 OUT_STATIC := $(BIN_DIR)/$(OUT_FILENAME)$(STATIC_EXT)
 OUT_SHARED := $(BIN_DIR)/$(OUT_FILENAME)$(SHARED_EXT)
 
+# === TARGETS ===
 .PHONY: all build-static build-shared clean
 
 all: build-static build-shared
@@ -84,6 +83,9 @@ all: build-static build-shared
 build-static: $(OUT_STATIC)
 
 build-shared: $(OUT_SHARED)
+
+clean:
+	@$(RM) $(RMFLAGS) $(BIN_DIR) $(OBJ_DIR)
 
 $(OUT_STATIC): $(OBJ_STATIC) | $(BIN_DIR)
 	$(AR) rcs $@ $^
@@ -99,9 +101,6 @@ $(OBJ_SHARED_DIR)/%$(OBJ_EXT): $(SRC_DIR)/%.c | $(OBJ_SHARED_DIR)
 
 $(BIN_DIR) $(OBJ_STATIC_DIR) $(OBJ_SHARED_DIR):
 	$(MKDIR) $(MKDIRFLAGS) "$@"
-
-clean:
-	@$(RM) $(RMFLAGS) $(BIN_DIR) $(OBJ_DIR)
 
 -include $(OBJ_STATIC:$(OBJ_EXT)=.d)
 -include $(OBJ_SHARED:$(OBJ_EXT)=.d)
