@@ -21,19 +21,19 @@
 extern u8 (*cpu_read_byte)(u16 addr);
 extern void (*cpu_write_byte)(u16 addr, u8 val);
 
-// initialize library internal variables
+/* Initialize library internal variables. */
 extern void cpu_library_init(void);
 
-// this is not an actual clock, but a whole instruction
+/* This is not an actual clock, but a whole instruction. */
 extern void cpu_clock(void);
 
-// execute a reset
+/* Execute a reset. */
 extern void cpu_reset(void);
 
-// execute an interrupt only if the interrupt disable flag is clear
+/* Execute an interrupt only if the interrupt disable flag is clear. */
 extern void cpu_irq(void);
 
-// execute an interrupt, no conditions
+/* Execute an interrupt, no conditions. */
 extern void cpu_nmi(void);
 
 #endif // VULC_6502_EMULATOR_API
