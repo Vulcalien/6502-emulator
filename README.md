@@ -34,8 +34,9 @@ while(1) {
 ```
 
 ## Resources
-- [This website](http://www.obelisk.me.uk/6502/) contains information about
-architecture, registers, instructions and addressing modes.
+- [This website](http://web.archive.org/web/20210803072420/http://www.obelisk.me.uk/6502/)
+contains information about architecture, registers, instructions
+and addressing modes.
 - I also used some of the information present in
 [this book](http://archive.6502.org/books/mcs6500_family_hardware_manual.pdf)
 to make sure that the emulator behaves correctly.
